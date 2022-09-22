@@ -23,13 +23,13 @@ headers = {
 
 depGraphResponse = requests.get(url + "org/" + SNYK_ORG_ID + "/project/" + SNYK_PROJ_ID + "/dep-graph", headers=headers)
 
-licenses_response = requests.post(url + "org/" + SNYK_ORG_ID + "/licenses", headers=headers)
+licensesResponse = requests.post(url + "org/" + SNYK_ORG_ID + "/licenses", headers=headers)
 
 print("Dependency Graph Response Code = ", depGraphResponse.status_code)
-print("Licenses Response Code = ", licenses_response.status_code)
+print("Licenses Response Code = ", licensesResponse.status_code)
 print("\n")
 depArray = depGraphResponse.json()
-licensesDict = licenses_response.json()
+licensesDict = licensesResponse.json()
 
 #creating a list of the dependencies where the word 'nodeId is found' after going to the correct location where the direct dependencies are located
 depList = [d['nodeId'] for d in depArray['depGraph']['graph']['nodes'][0]['deps']]
