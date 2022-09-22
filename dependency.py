@@ -34,8 +34,8 @@ licensesDict = licenses_response.json()
 #creating a list of the dependencies where the word 'nodeId is found' after going to the correct location where the direct dependencies are located
 depList = [d['nodeId'] for d in depArray['depGraph']['graph']['nodes'][0]['deps']]
 
-#setting up licensesArray that contains dependency name and its licenses
-licensesArray = []
+#setting up depLicenseList that contains dependency name and its licenses
+depLicenseList = []
 
 #getting licenses + dependencies
 licensesList = licensesDict['results']
@@ -49,14 +49,14 @@ def licensesCall():
                 'dependency name': dependency_name,
                 'license': licenses
             }
-            licensesArray.append(data)
+            depLicenseList.append(data)
 licensesCall()
 
 #setting up direct dependencies array
 directDependencies = []
 
 #matching the dependencies from depList to licensesArray to get direct dependency names + its licenses
-for d in licensesArray:
+for d in depLicenseList:
      if any(x in d['dependency name'] for x in depList):
          directDependencies.append(d)
         
